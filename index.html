@@ -558,65 +558,141 @@
             gap: 10px;
         }
 
-        /* Image Gallery Styles */
+     /* ===== IMAGE GALLERY STYLES ===== */
 .image-gallery {
     margin: 2rem 0;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    animation: fadeInUp 0.8s ease-out;
 }
 
+/* Consistent Aspect Ratio Containers */
 .image-container {
     position: relative;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid var(--glass-border);
     margin: 1.5rem 0;
+    
+    /* Perfect Aspect Ratio Control */
+    aspect-ratio: 16 / 9; /* Standard widescreen - change as needed */
+    width: 100%;
+    max-width: 900px; /* Prevents stretching on large screens */
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* Animation Properties */
+    animation: float 6s ease-in-out infinite;
+    animation-delay: calc(var(--item-index, 0) * 0.2s);
 }
 
-/* HOVER EFFECT - Applies to the entire container */
+/* Different Aspect Ratios for Different Content */
+.image-container.square {
+    aspect-ratio: 1 / 1; /* Perfect for diagrams */
+    max-width: 500px;
+}
+
+.image-container.portrait {
+    aspect-ratio: 3 / 4; /* Good for lab screenshots */
+    max-width: 400px;
+}
+
+.image-container.ultrawide {
+    aspect-ratio: 21 / 9; /* For panoramic views */
+}
+
+/* Hover Effects with Smooth Animations */
 .image-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.4),
+                0 0 0 1px rgba(59, 130, 246, 0.1);
 }
 
-/* IMAGE STYLING - Separate from container */
+/* Perfect Image Styling - Maintains Ratio */
 .image-container img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* Fills container without distortion */
     display: block;
-    transition: transform 0.3s ease; /* Smooth zoom on hover */
+    transition: all 0.5s ease;
+    transform-origin: center;
 }
 
-/* Optional: Add zoom effect on image hover */
+/* Smooth Zoom on Hover */
 .image-container:hover img {
-    transform: scale(1.02);
+    transform: scale(1.08);
+    filter: brightness(1.1) saturate(1.1);
 }
 
+/* Image Caption with Fade-in Animation */
 .image-caption {
     text-align: center;
     font-size: 0.9rem;
     color: var(--text-gray);
-    padding: 0.8rem;
-    background: rgba(30, 41, 59, 0.7);
+    padding: 1rem;
+    background: linear-gradient(to top, 
+                rgba(15, 23, 42, 0.95) 0%,
+                rgba(15, 23, 42, 0.85) 100%);
     font-style: italic;
     border-top: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    opacity: 0;
 }
-/* Carousel for Lab Photos */
+
+/* Caption Slide-up on Hover */
+.image-container:hover .image-caption {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Optional Overlay Effect */
+.image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+                rgba(59, 130, 246, 0.1) 0%,
+                transparent 50%,
+                rgba(6, 182, 212, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.image-container:hover::after {
+    opacity: 1;
+}
+
+/* ===== LAB CAROUSEL - PERFECTED ===== */
 .lab-carousel {
     position: relative;
     width: 100%;
-    height: 400px;
+    aspect-ratio: 16 / 9; /* Consistent ratio */
+    max-height: 500px;
     overflow: hidden;
-    border-radius: 12px;
-    margin: 1.5rem 0;
+    border-radius: 15px;
+    margin: 2rem 0;
+    border: 2px solid var(--glass-border);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    animation: slideIn 0.8s ease-out;
 }
 
 .carousel-slides {
     display: flex;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     height: 100%;
 }
 
@@ -626,134 +702,359 @@
     position: relative;
 }
 
+/* Perfect Image Fit for Carousel */
 .carousel-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Shows full image without cropping */
+    background: linear-gradient(135deg, 
+                rgba(30, 41, 59, 0.3) 0%,
+                rgba(15, 23, 42, 0.5) 100%);
 }
 
+/* Enhanced Carousel Controls */
 .carousel-controls {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 0;
     right: 0;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
+    z-index: 20;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 30px;
+    margin: 0 20px;
 }
 
 .carousel-dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid transparent;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-dot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: left 0.3s ease;
 }
 
 .carousel-dot.active {
-    background: var(--accent-blue);
-    transform: scale(1.2);
+    transform: scale(1.3);
+    box-shadow: 0 0 15px var(--accent-blue);
 }
 
+.carousel-dot.active::before {
+    left: 0;
+}
+
+/* Enhanced Navigation Buttons */
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(15, 23, 42, 0.7);
+    background: rgba(15, 23, 42, 0.85);
     color: white;
-    border: 1px solid var(--glass-border);
-    width: 40px;
-    height: 40px;
+    border: 2px solid var(--glass-border);
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s;
-    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 30;
+    font-size: 1.2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-btn:hover {
     background: var(--accent-blue);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+    border-color: var(--accent-blue);
 }
 
 .carousel-btn.prev {
-    left: 20px;
+    left: 25px;
+    animation: bounceLeft 2s infinite;
 }
 
 .carousel-btn.next {
-    right: 20px;
-}  
+    right: 25px;
+    animation: bounceRight 2s infinite;
+}
 
-        /* Labs Section */
-        .labs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+/* ===== LABS SECTION - ENHANCED ===== */
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    animation: fadeIn 1s ease-out;
+}
 
-        .lab-card {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
+.lab-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    animation: cardAppear 0.6s ease-out forwards;
+    animation-delay: calc(var(--card-index, 0) * 0.15s);
+    opacity: 0;
+}
 
-        .lab-card:hover {
-            border-color: var(--accent-purple);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
-        }
+.lab-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
 
-        .lab-number {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: var(--gradient-secondary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-bottom-left-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
+.lab-card:hover {
+    border-color: var(--accent-purple);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(139, 92, 246, 0.25);
+}
 
-        .lab-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
+.lab-card:hover::before {
+    transform: scaleX(1);
+}
 
-        .lab-content {
-            color: var(--text-gray);
-            margin-bottom: 1.5rem;
-        }
+.lab-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--gradient-secondary);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-bottom-left-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+    z-index: 5;
+}
 
-        .lab-preview {
-            width: 100%;
-            height: 200px;
-            background: rgba(30, 41, 59, 0.5);
-            border-radius: 8px;
-            margin: 1rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-gray);
-            overflow: hidden;
-        }
+.lab-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    color: var(--text-light);
+    background: linear-gradient(135deg, var(--text-light) 0%, var(--accent-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
 
-        .lab-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.lab-content {
+    color: var(--text-gray);
+    margin-bottom: 1.8rem;
+    line-height: 1.7;
+}
 
+/* Perfect Lab Preview with Consistent Ratio */
+.lab-preview {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Consistent ratio */
+    background: linear-gradient(135deg, 
+                rgba(30, 41, 59, 0.6) 0%,
+                rgba(15, 23, 42, 0.8) 100%);
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.lab-preview:hover {
+    transform: scale(1.01);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.lab-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.lab-preview:hover img {
+    transform: scale(1.05);
+}
+
+/* ===== ANIMATION KEYFRAMES ===== */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes cardAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceLeft {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) translateX(-5px);
+    }
+}
+
+@keyframes bounceRight {
+    0%, 100% {
+        transform: translateY(-50%) translateX(0);
+    }
+    50% {
+        transform: translateY(-50%) translateX(5px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+    .image-container {
+        aspect-ratio: 4 / 3; /* Better for mobile */
+        margin: 1rem 0;
+    }
+    
+    .lab-carousel {
+        aspect-ratio: 4 / 3;
+        max-height: 300px;
+    }
+    
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .carousel-btn.prev {
+        left: 10px;
+    }
+    
+    .carousel-btn.next {
+        right: 10px;
+    }
+    
+    .labs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .lab-card {
+        padding: 1.5rem;
+    }
+    
+    .lab-preview {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-container {
+        aspect-ratio: 1 / 1; /* Square for very small screens */
+    }
+    
+    .lab-carousel {
+        aspect-ratio: 1 / 1;
+    }
+    
+    .carousel-controls {
+        padding: 8px;
+        margin: 0 10px;
+        bottom: 15px;
+    }
+}
+
+/* Progress Bar for Carousel */
+.carousel-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.carousel-progress-bar {
+    height: 100%;
+    background: var(--gradient-primary);
+    width: 0%;
+    transition: width 0.3s ease;
+    animation: progress 6s linear infinite;
+}
+
+@keyframes progress {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
         /* Footer */
         footer {
             background: var(--bg-dark);
@@ -2088,6 +2389,101 @@
                 }
             });
         });
+        // Add this at the end of your existing JavaScript
+let carouselStates = {};
+
+function initCarousel(carouselId, slideCount) {
+    const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+    
+    carouselStates[carouselId] = {
+        currentSlide: 0,
+        totalSlides: slideCount,
+        interval: setInterval(() => nextSlide(carouselId), 6000) // Auto-slide every 6s
+    };
+    updateCarousel(carouselId);
+}
+
+function nextSlide(carouselId) {
+    const state = carouselStates[carouselId];
+    if (!state) return;
+    
+    state.currentSlide = (state.currentSlide + 1) % state.totalSlides;
+    updateCarousel(carouselId);
+    
+    // Reset auto-slide timer
+    clearInterval(state.interval);
+    state.interval = setInterval(() => nextSlide(carouselId), 6000);
+}
+
+function prevSlide(carouselId) {
+    const state = carouselStates[carouselId];
+    if (!state) return;
+    
+    state.currentSlide = (state.currentSlide - 1 + state.totalSlides) % state.totalSlides;
+    updateCarousel(carouselId);
+    
+    // Reset auto-slide timer
+    clearInterval(state.interval);
+    state.interval = setInterval(() => nextSlide(carouselId), 6000);
+}
+
+function goToSlide(carouselId, index) {
+    const state = carouselStates[carouselId];
+    if (!state) return;
+    
+    state.currentSlide = index;
+    updateCarousel(carouselId);
+    
+    // Reset auto-slide timer
+    clearInterval(state.interval);
+    state.interval = setInterval(() => nextSlide(carouselId), 6000);
+}
+
+function updateCarousel(carouselId) {
+    const state = carouselStates[carouselId];
+    if (!state) return;
+    
+    const carousel = document.getElementById(carouselId);
+    const slides = carousel.querySelector('.carousel-slides');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    const progressBar = carousel.querySelector('.carousel-progress-bar');
+    
+    // Update slide position
+    slides.style.transform = `translateX(-${state.currentSlide * 100}%)`;
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === state.currentSlide);
+    });
+    
+    // Reset progress bar animation
+    if (progressBar) {
+        progressBar.style.animation = 'none';
+        setTimeout(() => {
+            progressBar.style.animation = 'progress 6s linear infinite';
+        }, 10);
+    }
+}
+
+// Initialize carousels when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all carousels
+    initCarousel('lab1-carousel', 3);
+    initCarousel('lab2-carousel', 3);
+    initCarousel('lab3-carousel', 3);
+    initCarousel('lab4-carousel', 3);
+    
+    // Add card index for staggered animation
+    document.querySelectorAll('.lab-card').forEach((card, index) => {
+        card.style.setProperty('--card-index', index);
+    });
+    
+    // Add item index for image gallery animation
+    document.querySelectorAll('.image-container').forEach((container, index) => {
+        container.style.setProperty('--item-index', index);
+    });
+});
     </script>
 </body>
 </html>
