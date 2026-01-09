@@ -571,32 +571,39 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     border: 1px solid var(--glass-border);
+    margin: 1.5rem 0;
 }
 
+/* HOVER EFFECT - Applies to the entire container */
 .image-container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
 }
 
+/* IMAGE STYLING - Separate from container */
 .image-container img {
     width: 100%;
     height: auto;
     display: block;
+    transition: transform 0.3s ease; /* Smooth zoom on hover */
+}
+
+/* Optional: Add zoom effect on image hover */
+.image-container:hover img {
+    transform: scale(1.02);
 }
 
 .image-caption {
-    background: rgba(15, 23, 42, 0.9);
-    padding: 1rem;
-    color: var(--text-gray);
+    text-align: center;
     font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    color: var(--text-gray);
+    padding: 0.8rem;
+    background: rgba(30, 41, 59, 0.7);
+    font-style: italic;
     border-top: 1px solid var(--glass-border);
 }
-
 /* Carousel for Lab Photos */
 .lab-carousel {
     position: relative;
@@ -1878,7 +1885,7 @@
                     <a href="https://github.com/chidanand467" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="#" class="social-link">
+                    <a href="https://www.linkedin.com/in/chidanand-s-karennavar-096b21332?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link">
                         <i class="fab fa-linkedin"></i>
                     </a>
                     <a href="#" class="social-link">
@@ -1907,7 +1914,6 @@
                     <li><a href="#chapter3">Chapter 3: Vector Spaces</a></li>
                     <li><a href="#chapter4">Chapter 4: Orthogonality</a></li>
                     <li><a href="#chapter5">Chapter 5: Eigenvalues</a></li>
-                    <li><a href="#chapter6">Chapter 6: Quadratic Forms</a></li>
                     <li><a href="#labs">Laboratory Work</a></li>
                 </ul>
             </div>
