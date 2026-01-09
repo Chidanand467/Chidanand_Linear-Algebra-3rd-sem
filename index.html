@@ -1606,115 +1606,7 @@
             </div>
         </div>
 
-        <!-- Chapter 6 -->
-        <div class="chapter-card" id="chapter6">
-            <div class="chapter-header">
-                <div class="chapter-icon">
-                    <i class="fas fa-shapes"></i>
-                </div>
-                <h2 class="chapter-title">Chapter 6: Quadratic Forms & Structural Stability</h2>
-                <div class="chapter-hours">06 hours</div>
-            </div>
-            
-            <div class="content-section">
-                <h3 class="section-title">
-                    <i class="fas fa-lightbulb"></i>
-                    Key Concepts
-                </h3>
-                
-                <div class="key-concepts">
-                    <div class="concept-card">
-                        <h4 class="concept-title">Quadratic Forms</h4>
-                        <p>Expressions \(Q(x) = x^TAx\) where \(A\) is symmetric matrix, representing energy functions in engineering.</p>
-                    </div>
-                    
-                    <div class="concept-card">
-                        <h4 class="concept-title">Definiteness</h4>
-                        <p>Classification: Positive definite (\(\lambda_i > 0\)), negative definite (\(\lambda_i < 0\)), indefinite (mixed signs).</p>
-                    </div>
-                    
-                    <div class="concept-card">
-                        <h4 class="concept-title">Stability Criteria</h4>
-                        <p>Positive definite stiffness matrix → stable structure; indefinite → buckling possibility; singular → mechanism.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-section">
-                <h3 class="section-title">
-                    <i class="fas fa-calculator"></i>
-                    Core Principles
-                </h3>
-                
-                <div class="formula-container">
-                    <div class="formula">
-                        \[
-                        \text{Strain Energy: } U = \frac{1}{2}x^TKx
-                        \]
-                    </div>
-                    
-                    <div class="formula">
-                        \[
-                        \text{Kinetic Energy: } T = \frac{1}{2}\dot{x}^TM\dot{x}
-                        \]
-                    </div>
-                    
-                    <div class="formula">
-                        \[
-                        \text{Rayleigh Quotient: } R(v) = \frac{v^TKv}{v^TMv} \geq \lambda_{\min}
-                        \]
-                    </div>
-                    
-                    <div class="formula">
-                        \[
-                        \text{Buckling: } (K - \lambda G)\phi = 0
-                        \]
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-section">
-                <h3 class="section-title">
-                    <i class="fas fa-cogs"></i>
-                    Structural Engineering Applications
-                </h3>
-                
-                <div class="example">
-                    <h4 class="example-title">
-                        <i class="fas fa-hard-hat"></i>
-                        Column Buckling Analysis
-                    </h4>
-                    <p>For column with elastic stiffness \(K\) and geometric stiffness \(G\):</p>
-                    
-                    <div class="formula">
-                        \[
-                        \text{Solve } (K - \lambda G)\phi = 0 \Rightarrow \lambda_{\text{critical}} = \frac{\pi^2 EI}{L^2}
-                        \]
-                    </div>
-                    
-                    <p>Eigenvalues give buckling loads, eigenvectors show buckling mode shapes.</p>
-                </div>
-                
-                <div class="example">
-                    <h4 class="example-title">
-                        <i class="fas fa-balance-scale"></i>
-                        Stability Assessment
-                    </h4>
-                    <p>For stiffness matrix \(K\), check eigenvalues:</p>
-                    
-                    <div class="formula">
-                        \[
-                        \begin{aligned}
-                        &\lambda_i > 0: \text{Stable structure} \\
-                        &\lambda_i = 0: \text{Mechanism (rigid body mode)} \\
-                        &\lambda_i < 0: \text{Unstable (buckling)}
-                        \end{aligned}
-                        \]
-                    </div>
-                </div>
-            </div>
-        </div>
-
+       
         <!-- Labs Section -->
         <div class="chapter-card" id="labs">
             <div class="chapter-header">
@@ -1740,8 +1632,47 @@
                     <h3 class="lab-title">Spring System Analysis</h3>
                     <div class="lab-content">
                         <p><strong>Problem:</strong> 4-mass spring system displacement under applied loads</p>
+                    <!-- Image Container - Place this where you want images -->
+                        <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab1q.jpeg?raw=true" alt="Lab1 Q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB1 Q</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         <p><strong>Methods:</strong> Matrix assembly, equilibrium equations, numerical solution</p>
-                        <p><strong>Key Results:</strong> Displacements: u₁=0.225m, u₂=0.402m, u₃=0.455m, u₄=0.497m</p>
+                     <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab1a.jpeg?raw=true" alt="Lab1 A">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB1 A</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p><strong>Python Code</strong>Python Code</p>
+                     <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab1c.jpeg?raw=true" alt="Lab1 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB1 c</span>
+                                </div>
+                            </div>
+                        </div>
+                     <p><strong>Key Results:</strong> Displacements: u₁=0.225m, u₂=0.402m, u₃=0.455m, u₄=0.497m</p>
+                       <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab1r.jpeg?raw=true" alt="Lab1 r">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB1 R</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="lab-preview">
                         <div style="text-align: center;">
@@ -1757,8 +1688,45 @@
                     <h3 class="lab-title">Truss Force Analysis</h3>
                     <div class="lab-content">
                         <p><strong>Problem:</strong> Triangular truss member forces under vertical load</p>
+                           <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab2q.jpeg?raw=true" alt="Lab2 q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB2 q</span>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Methods:</strong> Equilibrium at joints, matrix solution</p>
+                         <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab2a.jpeg?raw=true" alt="Lab2 A">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB2 A</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p><strong>Python Code</strong>Python Code</p>
+                     <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab2c.jpeg?raw=true" alt="Lab2 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB2 c</span>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Key Results:</strong> F₁=-225N (T), F₂=375N (C), F₃=375N (C)</p>
+                          <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab2c.jpeg?raw=true" alt="Lab2 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB2 c</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="lab-preview">
                         <div style="text-align: center;">
@@ -1774,8 +1742,60 @@
                     <h3 class="lab-title">Gauss & LU Methods</h3>
                     <div class="lab-content">
                         <p><strong>Problem:</strong> Spring system and linear equations solution</p>
+                          <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab3qa.jpeg?raw=true" alt="Lab3 q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB3 q</span>
+                                </div>
+                            </div>
+                        </div>
+                          <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab3qb.jpeg?raw=true" alt="Lab1 q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB3 q</span>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Methods:</strong> Gaussian elimination, LU decomposition</p>
+                          <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab3aa.jpeg?raw=true" alt="Lab1 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB3 c</span>
+                                </div>
+                            </div>
+                        </div>  <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab3ab.jpeg?raw=true" alt="Lab3 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB3 c</span>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Key Results:</strong> Displacements and system solutions</p>
+                          <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab3ac.jpeg?raw=true" alt="Lab3 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB3 c</span>
+                                </div>
+                            </div>
+                        </div>  <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab3bc.jpeg?raw=true" alt="Lab3 c">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB3 c</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="lab-preview">
                         <div style="text-align: center;">
@@ -1791,8 +1811,35 @@
                     <h3 class="lab-title">Robot Kinematics</h3>
                     <div class="lab-content">
                         <p><strong>Problem:</strong> 2R & 3R robot forward kinematics and workspace</p>
+                         <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab4q.jpeg?raw=true" alt="Lab4 q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB4 q</span>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Methods:</strong> Homogeneous transformations, forward kinematics</p>
+                         <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab4a.jpeg?raw=true" alt="Lab4 q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB4 a</span>
+                                </div>
+                            </div>
+                        </div>
                         <p><strong>Key Results:</strong> End-effector positions, workspace analysis</p>
+                         <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/Chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/lab4r.jpeg?raw=true" alt="Lab4 q">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>LAB4 q</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="lab-preview">
                         <div style="text-align: center;">
@@ -1866,7 +1913,6 @@
         
         <div class="copyright">
             <p>&copy; 2025 Linear Algebra Portfolio | Chidanand S K | KLE Technological University, Hubli</p>
-            <p>This portfolio demonstrates practical applications of linear algebra in engineering systems.</p>
         </div>
     </footer>
 
