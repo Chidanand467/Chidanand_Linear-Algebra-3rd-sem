@@ -3,46 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linear Algebra Portfolio | Engineering Applications</title>
+    <title>Linear Algebra in Engineering | Chidanand S K</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- MathJax for LaTeX -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
     <style>
+        :root {
+            --primary-dark: #0a192f;
+            --primary-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --glass-bg: rgba(15, 23, 42, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --gradient-primary: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            --gradient-secondary: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            --gradient-warning: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            --gradient-success: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.5);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-            --bg-dark: #1a1a1a;
-            --bg-light: #ecf0f1;
-            --text-dark: #2c3e50;
-            --text-light: #ecf0f1;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        /* Navigation */
-        header {
-            background: var(--primary-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
             color: var(--text-light);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 20%);
         }
 
-        nav {
-            max-width: 1200px;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .header-scrolled {
+            padding: 0.8rem 0;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav-container {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -50,1076 +104,1935 @@
             align-items: center;
         }
 
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        nav ul {
+        .logo {
             display: flex;
-            list-style: none;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
             gap: 2rem;
-            flex-wrap: wrap;
+            list-style: none;
         }
 
-        nav a {
-            color: var(--text-light);
+        .nav-links a {
+            color: var(--text-gray);
             text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        nav a:hover {
-            color: var(--secondary-color);
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-light);
+        }
+
+        .nav-links a:hover::before {
+            width: 80%;
+        }
+
+        .nav-links a.active {
+            color: var(--text-light);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .nav-links a.active::before {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
             margin-bottom: 3rem;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .badge {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
         }
 
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
+        .badge:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
 
-        /* Container */
-        .container {
-            max-width: 1200px;
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--accent-blue);
+        }
+
+        .btn-outline:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            background: var(--gradient-secondary);
+            animation-delay: 5s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 20%;
+            background: var(--gradient-success);
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+
+        /* Chapter Navigation */
+        .chapter-nav {
+            position: sticky;
+            top: 80px;
+            z-index: 900;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .chapter-nav-container {
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
-        }
-
-        /* Cards */
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .card h2 {
-            color: var(--secondary-color);
-            border-bottom: 3px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 {
-            color: var(--text-dark);
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        /* Theory Section */
-        .theory-box {
-            background: #f8f9fa;
-            border-left: 5px solid var(--secondary-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 5px;
-        }
-
-        .theory-box strong {
-            color: var(--secondary-color);
-        }
-
-        /* Code Block */
-        .code-block {
-            background: var(--bg-dark);
-            color: #00ff00;
-            padding: 1.5rem;
-            border-radius: 5px;
+            display: flex;
+            gap: 1rem;
             overflow-x: auto;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
+            scrollbar-width: none;
+        }
+
+        .chapter-nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chapter-nav-btn {
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chapter-nav-btn:hover {
+            color: var(--text-light);
+            border-color: var(--accent-blue);
+        }
+
+        .chapter-nav-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Chapters Container */
+        .chapters-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Chapter Cards */
+        .chapter-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .chapter-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), transparent);
+            z-index: -1;
+        }
+
+        .chapter-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .chapter-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .chapter-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--text-light) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .chapter-hours {
+            margin-left: auto;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             font-size: 0.9rem;
-            border: 2px solid var(--secondary-color);
+            color: var(--accent-cyan);
         }
 
-        .code-block pre {
-            margin: 0;
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 3rem;
         }
 
-        /* Output Block */
-        .output-block {
-            background: #e8f4f8;
-            border: 2px solid var(--success-color);
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            color: #1a1a1a;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
         }
 
-        /* Equations */
-        .equation {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 5px;
-            font-style: italic;
-            text-align: center;
+        .section-title i {
+            color: var(--accent-blue);
         }
 
-        /* Grid Layout */
-        .grid-2 {
+        .key-concepts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
-        /* Lab Cards */
-        .lab-card {
-            background: white;
-            border: 2px solid var(--secondary-color);
-            border-radius: 10px;
+        .concept-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             padding: 1.5rem;
             transition: all 0.3s;
         }
 
-        .lab-card:hover {
-            background: #f0f7ff;
-            border-color: var(--accent-color);
+        .concept-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
         }
 
-        .lab-card h4 {
-            color: var(--secondary-color);
+        .concept-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Formulas */
+        .formula-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-primary);
+        }
+
+        .formula {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        /* Examples */
+        .example {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .example-title {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Image Gallery Styles */
+.image-gallery {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.image-container {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    border: 1px solid var(--glass-border);
+}
+
+.image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.2);
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-caption {
+    background: rgba(15, 23, 42, 0.9);
+    padding: 1rem;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Carousel for Lab Photos */
+.lab-carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+}
+
+.carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.carousel-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-dot.active {
+    background: var(--accent-blue);
+    transform: scale(1.2);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(15, 23, 42, 0.7);
+    color: white;
+    border: 1px solid var(--glass-border);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: var(--accent-blue);
+}
+
+.carousel-btn.prev {
+    left: 20px;
+}
+
+.carousel-btn.next {
+    right: 20px;
+}  
+
+        /* Labs Section */
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lab-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lab-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .lab-number {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-bottom-left-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .lab-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .lab-content {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-preview {
+            width: 100%;
+            height: 200px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            overflow: hidden;
+        }
+
+        .lab-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Footer */
         footer {
-            background: var(--primary-color);
-            color: var(--text-light);
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            background: var(--bg-dark);
+            border-top: 1px solid var(--glass-border);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
         }
 
-        .tab-btn {
-            background: var(--bg-light);
-            border: 2px solid var(--secondary-color);
-            padding: 0.7rem 1.5rem;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .tab-btn.active {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .tab-btn:hover {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Chapter Sections */
-        .chapter {
-            margin-bottom: 3rem;
-        }
-
-        .chapter-title {
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
+        .footer-section h3 {
+            font-size: 1.3rem;
             margin-bottom: 1.5rem;
+            color: var(--text-light);
         }
 
-        .chapter-title h2 {
-            margin: 0;
-            font-size: 1.8rem;
+        .footer-links {
+            list-style: none;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-            .hero h1 {
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .chapter-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--glass-bg);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .chapter-title {
                 font-size: 1.8rem;
             }
-
-            nav {
-                flex-direction: column;
-                gap: 1rem;
+            
+            .chapter-card {
+                padding: 1.5rem;
             }
+        }
 
-            .tabs {
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-cta {
                 flex-direction: column;
             }
-
-            .tab-btn {
+            
+            .btn {
                 width: 100%;
+                justify-content: center;
+            }
+            
+            .chapter-nav-container {
+                padding: 0 1rem;
+            }
+            
+            .chapter-nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
             }
         }
 
-        /* Highlight */
-        .highlight {
-            background: #fffacd;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-        }
-
-        /* Table */
-        table {
+        /* Matrix Background Animation */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
         }
 
-        table th, table td {
-            border: 1px solid #ddd;
-            padding: 0.8rem;
-            text-align: left;
+        .matrix-column {
+            position: absolute;
+            top: -100px;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            animation: matrix-rain 20s linear infinite;
         }
 
-        table th {
-            background: var(--secondary-color);
-            color: white;
-        }
-
-        table tr:nth-child(even) {
-            background: #f9f9f9;
+        @keyframes matrix-rain {
+            0% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <div class="logo">📐 Linear Algebra Portfolio</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <span>Linear Algebra Portfolio</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#chapter1">Chapter 1</a></li>
                 <li><a href="#chapter2">Chapter 2</a></li>
                 <li><a href="#chapter3">Chapter 3</a></li>
+                <li><a href="#chapter4">Chapter 4</a></li>
+                <li><a href="#chapter5">Chapter 5</a></li>
+                <li><a href="#chapter6">Chapter 6</a></li>
                 <li><a href="#labs">Labs</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1>Linear Algebra in Engineering Applications</h1>
-        <p>Comprehensive portfolio covering matrix methods, vector spaces, and real-world applications</p>
-        <p>Chidanand S K | 3rd Semester | Automation and Robotics </p>
+        <div class="animated-bg">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 class="hero-title">Linear Algebra in Engineering Applications</h1>
+            <p class="hero-subtitle">
+                Comprehensive exploration of matrix methods, vector spaces, eigenvalues, and their applications in 
+                Robotics, Structural Analysis, and Dynamic Systems. Third Semester Automation and Robotics.
+            </p>
+            
+            <div class="hero-badges">
+                <div class="badge">
+                    <i class="fas fa-robot"></i>
+                    <span>Robotics Applications</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-cube"></i>
+                    <span>3D Transformations</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-wave-square"></i>
+                    <span>Dynamic Systems</span>
+                </div>
+                <div class="badge">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Least Squares</span>
+                </div>
+            </div>
+            
+            <div class="hero-cta">
+                <a href="#chapter1" class="btn btn-primary">
+                    <i class="fas fa-book-open"></i>
+                    Start Learning
+                </a>
+                <a href="#labs" class="btn btn-outline">
+                    <i class="fas fa-flask"></i>
+                    View Labs
+                </a>
+            </div>
+        </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Chapter 1: Introduction to Linear Algebra -->
-        <div class="chapter" id="chapter1">
-            <div class="chapter-title">
-                <h2>Chapter 1: Why Linear Algebra for Engineers?</h2>
+    <!-- Chapter Navigation -->
+    <div class="chapter-nav">
+        <div class="chapter-nav-container" id="chapterNav">
+            <button class="chapter-nav-btn active" data-target="chapter1">
+                <i class="fas fa-cube"></i>
+                Chapter 1: Basics
+            </button>
+            <button class="chapter-nav-btn" data-target="chapter2">
+                <i class="fas fa-th"></i>
+                Chapter 2: Matrix Methods
+            </button>
+            <button class="chapter-nav-btn" data-target="chapter3">
+                <i class="fas fa-vector-square"></i>
+                Chapter 3: Vector Spaces
+            </button>
+            <button class="chapter-nav-btn" data-target="chapter4">
+                <i class="fas fa-ruler-combined"></i>
+                Chapter 4: Orthogonality
+            </button>
+            <button class="chapter-nav-btn" data-target="chapter5">
+                <i class="fas fa-wave-square"></i>
+                Chapter 5: Eigenvalues
+            </button>
+            <button class="chapter-nav-btn" data-target="chapter6">
+                <i class="fas fa-shapes"></i>
+                Chapter 6: Quadratic Forms
+            </button>
+            <button class="chapter-nav-btn" data-target="labs">
+                <i class="fas fa-flask"></i>
+                Laboratory Work
+            </button>
+        </div>
+    </div>
+
+    <!-- Chapters Container -->
+    <div class="chapters-container">
+        
+        <!-- Chapter 1 -->
+        <div class="chapter-card visible" id="chapter1">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <h2 class="chapter-title">Chapter 1: Why Linear Algebra for Engineers?</h2>
+                <div class="chapter-hours">05 hours</div>
             </div>
-
-            <div class="card">
-                <h2>1.1 Core Concepts</h2>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Concepts
+                </h3>
                 
-                <div class="theory-box">
-                    <strong>What is Linear Algebra?</strong>
-                    <p>Linear Algebra is the mathematical foundation for solving systems of linear equations, which appear in nearly every engineering problem. Instead of solving equations one by one, we use matrices to solve them efficiently.</p>
+                <div class="key-concepts">
+                    <div class="concept-card">
+                        <h4 class="concept-title">Matrix Form Representation</h4>
+                        <p>Transforming systems of equations into compact matrix form \(Ax = b\) enables efficient computational solutions.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Linearity Principle</h4>
+                        <p>In linear systems, doubling input doubles output (superposition), allowing decomposition of complex problems.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Singular vs Non-Singular</h4>
+                        <p>\(\det(A) = 0\) indicates singularity (no unique solution), physically meaning instability or redundancy in structures.</p>
+                    </div>
                 </div>
-
-                <h3>Key Question: Why Stack Equations in Matrix Form?</h3>
-                <p>Consider a system with n equations and n unknowns. Without matrices, solving manually becomes exponentially complex. With matrices (Ax = b), we leverage powerful computational methods.</p>
-
-                <div class="equation">
-                    <strong>System of Equations → Matrix Form:</strong><br>
-                    a₁₁x₁ + a₁₂x₂ + ... + a₁ₙxₙ = b₁<br>
-                    a₂₁x₁ + a₂₂x₂ + ... + a₂ₙxₙ = b₂<br>
-                    ⋮<br>
-                    aₘ₁x₁ + aₘ₂x₂ + ... + aₘₙxₙ = bₘ<br>
-                    <br>
-                    <strong>Becomes:</strong> <strong>Ax = b</strong>
-                </div>
-
-                <h3>1.2 Linearity: The Power of Proportionality</h3>
-                <p>In linear systems, <span class="highlight">doubling the input doubles the output</span>. This property (superposition) allows us to:</p>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li>Solve complex problems by breaking them into smaller pieces</li>
-                    <li>Use pre-computed solutions efficiently</li>
-                    <li>Understand system behavior without solving every scenario</li>
-                </ul>
-
-                <div class="theory-box">
-                    <strong>Example: Spring System</strong>
-                    <p>If force F causes displacement x, then force 2F causes displacement 2x (assuming linear spring). This linearity simplifies analysis tremendously.</p>
-                </div>
-
-                <h3>1.3 Singular vs Non-Singular Matrices</h3>
-                <div class="equation">
-                    If det(A) = 0 → Matrix is <strong>singular</strong> (no unique solution)<br>
-                    If det(A) ≠ 0 → Matrix is <strong>non-singular</strong> (unique solution exists)
-                </div>
-
-                <p><strong>Physical Interpretation:</strong></p>
-                <table>
-                    <tr>
-                        <th>System</th>
-                        <th>Singular Matrix</th>
-                        <th>Meaning</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Truss</td>
-                        <td>det(A) = 0</strong></td>
-                        <td>Structure is unstable/internally redundant</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Spring System</strong></td>
-                        <td>det(K) = 0</td>
-                        <td>Zero stiffness - infinite displacement</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Pipe Network</strong></td>
-                        <td>det(A) = 0</td>
-                        <td>Impossible flow distribution</td>
-                    </tr>
-                </table>
             </div>
-
-            <div class="card">
-                <h2>1.4 Engineering Applications Overview</h2>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Core Formulas
+                </h3>
                 
-                <div class="grid-2">
-                    <div class="lab-card">
-                        <h4>🔧 Structural Analysis</h4>
-                        <p><strong>Problem:</strong> Find member forces in trusses</p>
-                        <p><strong>Method:</strong> Equilibrium equations at joints</p>
-                        <p><strong>Matrix Form:</strong> Aₑ·F = P (equilibrium matrix · forces = loads)</p>
+                <div class="formula-container">
+                    <div class="formula">
+                        \[
+                        \text{System of equations: } 
+                        \begin{cases}
+                        a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\
+                        a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\
+                        \vdots \\
+                        a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m
+                        \end{cases}
+                        \]
                     </div>
                     
-                    <div class="lab-card">
-                        <h4>🌊 Fluid Systems</h4>
-                        <p><strong>Problem:</strong> Determine flows in pipe networks</p>
-                        <p><strong>Method:</strong> Flow conservation at nodes</p>
-                        <p><strong>Matrix Form:</strong> Node equations balance inflow/outflow</p>
+                    <div class="formula">
+                        \[
+                        \text{Matrix form: } A\mathbf{x} = \mathbf{b}
+                        \]
                     </div>
                     
-                    <div class="lab-card">
-                        <h4>⚙️ Mechanical Systems</h4>
-                        <p><strong>Problem:</strong> Spring-mass displacements</p>
-                        <p><strong>Method:</strong> Force balance on each mass</p>
-                        <p><strong>Matrix Form:</strong> Kx = F (stiffness matrix)</p>
+                    <div class="formula">
+                        \[
+                        \text{Spring system: } K\mathbf{x} = \mathbf{F}
+                        \]
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Engineering Applications
+                </h3>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-robot"></i>
+                        Spring-Mass System Analysis
+                    </h4>
+                    <p>For two masses connected by springs with stiffness \(k_1 = 10\) N/m, \(k_2 = 5\) N/m, and force \(F = 20\) N:</p>
+                    
+                    <div class="formula">
+                        \[
+                        \begin{bmatrix}
+                        k_1 + k_2 & -k_2 \\
+                        -k_2 & k_2
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                        x_1 \\ x_2
+                        \end{bmatrix}
+                        =
+                        \begin{bmatrix}
+                        F \\ 0
+                        \end{bmatrix}
+                        \]
                     </div>
                     
-                    <div class="lab-card">
-                        <h4>🤖 Robotics</h4>
-                        <p><strong>Problem:</strong> Forward/inverse kinematics</p>
-                        <p><strong>Method:</strong> Transformation matrices</p>
-                        <p><strong>Matrix Form:</strong> T(θ) = Product of rotation matrices</p>
+                    <p>Solving gives \(x_1 = 2.0\) m, \(x_2 = 2.0\) m. Both masses displace equally due to force transmission through springs.</p>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="chapter-card" id="chapter2">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-th"></i>
+                </div>
+                <h2 class="chapter-title">Chapter 2: Gaussian Elimination & LU Decomposition</h2>
+                <div class="chapter-hours">07 hours</div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Concepts
+                </h3>
+                
+                <div class="key-concepts">
+                    <div class="concept-card">
+                        <h4 class="concept-title">Gaussian Elimination</h4>
+                        <p>Systematic method to transform matrix to upper triangular form via row operations, then solve by back substitution.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">LU Decomposition</h4>
+                        <p>Factorizing \(A = LU\) where \(L\) is lower triangular and \(U\) is upper triangular, enabling efficient solutions for multiple right-hand sides.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Matrix Rank</h4>
+                        <p>Number of linearly independent rows/columns determining solution existence: \(\text{rank}(A) = \text{rank}([A|b])\) for consistency.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Core Algorithms
+                </h3>
+                
+                <div class="formula-container">
+                    <div class="formula">
+                        \[
+                        \text{Forward Elimination: } 
+                        \begin{array}{l}
+                        \text{Create zeros below pivots} \\
+                        R_j \leftarrow R_j - \frac{a_{ji}}{a_{ii}} R_i
+                        \end{array}
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{LU Decomposition: } A = LU
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Solving: } 
+                        \begin{cases}
+                        L\mathbf{y} = \mathbf{b} \quad (\text{forward substitution}) \\
+                        U\mathbf{x} = \mathbf{y} \quad (\text{back substitution})
+                        \end{cases}
+                        \]
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Practical Example
+                </h3>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-bridge"></i>
+                        Truss Analysis with LU
+                    </h4>
+                    <p>For triangular truss with equilibrium matrix \(A\) and load vector \(\mathbf{b}\):</p>
+                    
+                    <div class="formula">
+                        \[
+                        A = \begin{bmatrix}
+                        0 & \frac{4}{5} & \frac{4}{5} \\
+                        -1 & 0 & -\frac{3}{5} \\
+                        1 & \frac{3}{5} & 0
+                        \end{bmatrix}, \quad
+                        \mathbf{b} = \begin{bmatrix}
+                        600 \\ 0 \\ 0
+                        \end{bmatrix}
+                        \]
+                    </div>
+                    <div class="Worked out Problem">
+                    <h4 class="Truss problem">
+                        <i class="fas fa-robot"></i>
+                        Truss analysis
+                    </h4>
+                    <!-- Image Container - Place this where you want images -->
+                        <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="https://github.com/chidanand467/Chidanand_Linear-Algebra-3rd-sem/blob/main/truss.jpg?raw=true" alt="Truss Problem Example">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>Truss Anslysis</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>Decompose \(A = LU\), solve to find member forces: \(F_1 = -225\) N (tension), \(F_2 = 375\) N (compression), \(F_3 = 375\) N (compression).</p>
+                    <div class="Worked out Problem">
+                    <h4 class="Truss problem">
+                        <i class="fas fa-robot"></i>
+                        Truss analysis
+                    </h4>
+                    <!-- Image Container - Place this where you want images -->
+                        <div class="image-gallery">
+                            <div class="image-container">
+                                <img src="" alt="Truss Problem Example">
+                                <div class="image-caption">
+                                    <i class="fas fa-image"></i>
+                                    <span>Truss Anslysis</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Chapter 2: Matrix Methods -->
-        <div class="chapter" id="chapter2">
-            <div class="chapter-title">
-                <h2>Chapter 2: Gaussian Elimination & LU Decomposition</h2>
+        <!-- Chapter 3 -->
+        <div class="chapter-card" id="chapter3">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-vector-square"></i>
+                </div>
+                <h2 class="chapter-title">Chapter 3: Vector Spaces & Linear Transformations</h2>
+                <div class="chapter-hours">12 hours</div>
             </div>
-
-            <div class="card">
-                <h2>2.1 Gaussian Elimination Method</h2>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Concepts
+                </h3>
                 
-                <div class="theory-box">
-                    <strong>Goal:</strong> Transform Ax = b into upper triangular form, then use back-substitution.
-                </div>
-
-                <h3>Steps:</h3>
-                <ol style="margin-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Forward Elimination:</strong> Create zeros below pivots</li>
-                    <li><strong>Back Substitution:</strong> Solve from last equation upward</li>
-                </ol>
-
-                <div class="equation">
-                    Original System Ax = b<br>
-                    ↓ (Row operations)<br>
-                    Upper Triangular Ux = c<br>
-                    ↓ (Back substitution)<br>
-                    Solution x
-                </div>
-
-                <h3>Example Problem:</h3>
-                <p>Solve the system:</p>
-                <div style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
-                    2x + y = 5<br>
-                    4x - y = 3
-                </div>
-
-                <div class="code-block"><pre>import numpy as np
-
-# Coefficient matrix and constant vector
-A = np.array([[2, 1], [4, -1]], dtype=float)
-b = np.array([5, 3], dtype=float)
-
-# Gaussian elimination using numpy
-x = np.linalg.solve(A, b)
-print(f"Solution: x = {x[0]:.4f}, y = {x[1]:.4f}")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    Solution: x = 1.3333, y = 2.3333
-                </div>
-
-                <h3>Advantages of Gaussian Elimination:</h3>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li>Computationally efficient: O(n³) operations</li>
-                    <li>Works for any non-singular matrix</li>
-                    <li>Foundation for LU decomposition</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>2.2 LU Decomposition</h2>
-                
-                <div class="theory-box">
-                    <strong>Concept:</strong> Decompose A into Lower (L) and Upper (U) triangular matrices<br>
-                    A = LU
-                </div>
-
-                <div class="equation">
-                    A = LU<br>
-                    where L is lower triangular and U is upper triangular<br>
-                    <br>
-                    Solving Ax = b becomes:<br>
-                    1. Solve Ly = b for y (forward substitution)<br>
-                    2. Solve Ux = y for x (back substitution)
-                </div>
-
-                <h3>Advantage of LU:</h3>
-                <p>If you need to solve Ax = b₁, Ax = b₂, ... repeatedly:</p>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li>Decompose A once: O(n³)</li>
-                    <li>Solve each system: O(n²) instead of O(n³)</li>
-                    <li>Major savings for multiple right-hand sides</li>
-                </ul>
-
-                <h3>Example:</h3>
-                <div class="code-block"><pre>from scipy.linalg import lu
-import numpy as np
-
-# Matrix to decompose
-A = np.array([[3, -1, 2], 
-              [-3, -2, 10], 
-              [9, -5, 6]], dtype=float)
-
-# LU Decomposition
-P, L, U = lu(A)
-print("L matrix:")
-print(L)
-print("\nU matrix:")
-print(U)</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    LU Decomposition successful with permutation handling
+                <div class="key-concepts">
+                    <div class="concept-card">
+                        <h4 class="concept-title">Vector Space Axioms</h4>
+                        <p>Closure under addition and scalar multiplication, existence of zero vector, associativity, commutativity, distributivity.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Basis & Dimension</h4>
+                        <p>Minimal set of linearly independent vectors spanning the space. Dimension = number of basis vectors.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Linear Transformations</h4>
+                        <p>Mappings \(T: V \to W\) preserving vector operations: \(T(u+v) = T(u) + T(v)\), \(T(cu) = cT(u)\).</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="card">
-                <h2>2.3 Matrix Rank & Singular Matrices</h2>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Fundamental Transformations
+                </h3>
                 
-                <div class="theory-box">
-                    <strong>Rank:</strong> Number of linearly independent rows (or columns)<br>
-                    <strong>Significance:</strong> Determines if unique solution exists
+                <div class="formula-container">
+                    <div class="formula">
+                        \[
+                        \text{Rotation (2D): } 
+                        R_\theta = \begin{bmatrix}
+                        \cos\theta & -\sin\theta \\
+                        \sin\theta & \cos\theta
+                        \end{bmatrix}
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Scaling: } 
+                        S = \begin{bmatrix}
+                        s_x & 0 \\
+                        0 & s_y
+                        \end{bmatrix}
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Shear: } 
+                        H = \begin{bmatrix}
+                        1 & k \\
+                        0 & 1
+                        \end{bmatrix}
+                        \]
+                    </div>
                 </div>
-
-                <div class="equation">
-                    For m×n matrix A with system Ax = b:<br>
-                    • If rank(A) = rank([A|b]) = n → Unique solution<br>
-                    • If rank(A) = rank([A|b]) &lt; n → Infinitely many solutions<br>
-                    • If rank(A) &lt; rank([A|b]) → No solution
-                </div>
-
-                <h3>Python Example:</h3>
-                <div class="code-block"><pre>import numpy as np
-
-# Matrix for truss force equilibrium
-A = np.array([[0.1, 0, 0.1, 0],
-              [0.1, 0.2, 0.3, 0.1],
-              [0.2, 0.1, 0.3, 0.1],
-              [0.1, 0.1, 0.2, 0.1]])
-
-rank = np.linalg.matrix_rank(A)
-print(f"Rank of matrix: {rank}")
-print(f"Matrix is {'non-singular' if rank == 4 else 'singular or rank-deficient'}")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    Rank of matrix: 3<br>
-                    Matrix is singular or rank-deficient
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Robotics Application
+                </h3>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-robot"></i>
+                        2R Robot Forward Kinematics
+                    </h4>
+                    <p>For link lengths \(L_1 = 5\) m, \(L_2 = 3\) m, joint angles \(\theta_1 = 45^\circ\), \(\theta_2 = 30^\circ\):</p>
+                    
+                    <div class="formula">
+                        \[
+                        \begin{aligned}
+                        x &= L_1\cos\theta_1 + L_2\cos(\theta_1 + \theta_2) \\
+                        y &= L_1\sin\theta_1 + L_2\sin(\theta_1 + \theta_2)
+                        \end{aligned}
+                        \]
+                    </div>
+                    
+                    <p>End-effector position: \(x \approx 5.94\) m, \(y \approx 5.75\) m. Workspace analysis reveals reachable annular region.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Chapter 3: Vector Spaces & Applications -->
-        <div class="chapter" id="chapter3">
-            <div class="chapter-title">
-                <h2>Chapter 3: Vector Spaces & Linear Transformations</h2>
+        <!-- Chapter 4 -->
+        <div class="chapter-card" id="chapter4">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-ruler-combined"></i>
+                </div>
+                <h2 class="chapter-title">Chapter 4: Orthogonality & Least Squares</h2>
+                <div class="chapter-hours">06 hours</div>
             </div>
-
-            <div class="card">
-                <h2>3.1 Vector Spaces</h2>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Concepts
+                </h3>
                 
-                <div class="theory-box">
-                    <strong>Vector Space:</strong> A set of vectors with operations (addition, scalar multiplication) that satisfy 8 axioms.
+                <div class="key-concepts">
+                    <div class="concept-card">
+                        <h4 class="concept-title">Orthogonality</h4>
+                        <p>Vectors are orthogonal if their dot product is zero: \(u \cdot v = 0\), representing perpendicular directions.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Vector Projection</h4>
+                        <p>Component of vector \(v\) along direction \(u\): \(\text{proj}_u(v) = \frac{u \cdot v}{u \cdot u} u\).</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Least Squares</h4>
+                        <p>Minimizing sum of squared errors \(\|Ax - b\|^2\) when exact solution doesn't exist, giving best approximate solution.</p>
+                    </div>
                 </div>
-
-                <h3>Key Properties:</h3>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li><strong>Closure:</strong> u + v is in the space; cu is in the space</li>
-                    <li><strong>Zero Vector:</strong> 0 is always in the space</li>
-                    <li><strong>Associativity & Distributivity</strong></li>
-                </ul>
-
-                <h3>Basis & Dimension:</h3>
-                <div class="equation">
-                    A basis is a set of linearly independent vectors that span the space.<br>
-                    <strong>Dimension</strong> = number of vectors in the basis<br>
-                    <br>
-                    Example: ℝ² has basis {(1,0), (0,1)} → Dimension = 2
-                </div>
-
-                <h3>Robot Motion Example:</h3>
-                <p>A robot gripper operates on 2D plane:</p>
-                <div style="background: #f0f7ff; padding: 1rem; border-radius: 5px; margin: 1rem 0;">
-                    <strong>Motor A produces:</strong> v₁ = [2, 1] m/s<br>
-                    <strong>Motor B produces:</strong> v₂ = [1, 3] m/s<br>
-                    <br>
-                    Total motion: <strong>r = a·v₁ + b·v₂</strong><br>
-                    where a, b are motor speeds (scalars)
-                </div>
-
-                <h3>Questions:</h3>
-                <ul style="margin-left: 2rem; margin-top: 1rem;">
-                    <li>Can we reach position [5, 7]? (Find a, b)</li>
-                    <li>Do v₁ and v₂ span ℝ²?</li>
-                    <li>Are they linearly independent?</li>
-                </ul>
             </div>
-
-            <div class="card">
-                <h2>3.2 Linear Transformations</h2>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Core Formulas
+                </h3>
                 
-                <div class="theory-box">
-                    <strong>Linear Transformation:</strong> Function T: V → W where<br>
-                    T(u + v) = T(u) + T(v) (additivity)<br>
-                    T(cu) = cT(u) (homogeneity)
+                <div class="formula-container">
+                    <div class="formula">
+                        \[
+                        \text{Dot Product: } u \cdot v = \sum_{i=1}^n u_i v_i
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Angle: } \theta = \cos^{-1}\left(\frac{u \cdot v}{\|u\|\|v\|}\right)
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Normal Equations: } A^TAx = A^Tb
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{QR Method: } A = QR,\quad Rx = Q^Tb
+                        \]
+                    </div>
                 </div>
-
-                <h3>Matrix Representation:</h3>
-                <p>Every linear transformation can be represented as matrix multiplication:</p>
-                <div class="equation">
-                    T(x) = Ax
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Engineering Applications
+                </h3>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-chart-line"></i>
+                        Beam Deflection Analysis
+                    </h4>
+                    <p>Measured deflections at positions \(x = [0, 1, 2, 3, 4]\) m: \(y = [5.20, 4.10, 3.35, 2.35, 1.90]\) mm.</p>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Fit line } y = mx + c \text{ minimizing } \sum (y_i - (mx_i + c))^2
+                        \]
+                    </div>
+                    
+                    <p>Least squares solution: \(y = -0.835x + 5.050\), with residuals showing measurement errors.</p>
                 </div>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-robot"></i>
+                        Robot Path Tracking
+                    </h4>
+                    <p>Robot velocity \(\vec{v} = (2,5)\) m/s, desired path direction \(\vec{u} = \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)\):</p>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Component along path} = (\vec{v} \cdot \vec{u})\vec{u} = \left(\frac{7}{\sqrt{2}}\right)\vec{u}
+                        \]
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <h3>Common Transformations:</h3>
-                <table>
-                    <tr>
-                        <th>Transformation</th>
-                        <th>Matrix A</th>
-                        <th>Effect</th>
-                    </tr>
-                    <tr>
-                        <td><strong>Scaling by α</strong></td>
-                        <td>[[α, 0], [0, α]]</td>
-                        <td>Multiply all distances by α</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Rotation by θ</strong></td>
-                        <td>[[cos θ, -sin θ], [sin θ, cos θ]]</td>
-                        <td>Rotate by angle θ counterclockwise</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Shearing</strong></td>
-                        <td>[[1, k], [0, 1]]</td>
-                        <td>Shear in x-direction by factor k</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Reflection</strong></td>
-                        <td>[[1, 0], [0, -1]]</td>
-                        <td>Reflect across x-axis</td>
-                    </tr>
-                </table>
+        <!-- Chapter 5 -->
+        <div class="chapter-card" id="chapter5">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-wave-square"></i>
+                </div>
+                <h2 class="chapter-title">Chapter 5: Eigenvalues, Eigenvectors & Dynamics</h2>
+                <div class="chapter-hours">07 hours</div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Concepts
+                </h3>
+                
+                <div class="key-concepts">
+                    <div class="concept-card">
+                        <h4 class="concept-title">Eigenvalue Problem</h4>
+                        <p>For matrix \(A\), find \(\lambda\) and \(v\) such that \(Av = \lambda v\), where \(\lambda\) = eigenvalue, \(v\) = eigenvector.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Modal Analysis</h4>
+                        <p>Eigenvalues represent natural frequencies squared, eigenvectors represent mode shapes of vibration.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Diagonalization</h4>
+                        <p>Transforming \(A = PDP^{-1}\) where \(D\) is diagonal matrix of eigenvalues, \(P\) contains eigenvectors.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Fundamental Equations
+                </h3>
+                
+                <div class="formula-container">
+                    <div class="formula">
+                        \[
+                        \text{Characteristic Equation: } \det(A - \lambda I) = 0
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Vibration Equation: } M\ddot{x} + Kx = 0
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Generalized Eigenvalue: } (K - \omega^2 M)\phi = 0
+                        \]
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Dynamic Systems Applications
+                </h3>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-building"></i>
+                        Two-Story Building Vibration
+                    </h4>
+                    <p>Mass matrix \(M = \begin{bmatrix}1000 & 0 \\ 0 & 1000\end{bmatrix}\) kg, Stiffness \(K = \begin{bmatrix}40000 & -20000 \\ -20000 & 20000\end{bmatrix}\) N/m:</p>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Solve } (K - \omega^2 M)\phi = 0 \Rightarrow \omega_1 = 5.84 \text{ rad/s}, \omega_2 = 2.42 \text{ rad/s}
+                        \]
+                    </div>
+                    
+                    <p>Mode shapes: First mode - floors move together; Second mode - floors move oppositely.</p>
+                </div>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-robot"></i>
+                        Robotic Arm Stiffness
+                    </h4>
+                    <p>3-segment arm stiffness matrix \(K = \begin{bmatrix}2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2\end{bmatrix}\):</p>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Eigenvalues: } \lambda = 0.586, 2.000, 3.414
+                        \]
+                    </div>
+                    
+                    <p>Corresponding eigenvectors show bending patterns: all same direction, alternating, and specific combinations.</p>
+                </div>
+            </div>
+        </div>
 
-                <h3>Robot Rotation Example:</h3>
-                <p>Camera rotates 45° counterclockwise. Object at (4, 3) appears at:</p>
-                <div class="code-block"><pre>import numpy as np
-
-theta = np.radians(45)  # 45 degrees
-R = np.array([[np.cos(theta), -np.sin(theta)],
-              [np.sin(theta), np.cos(theta)]])
-
-P = np.array([4, 3])
-P_rotated = R @ P
-
-print(f"Original position: {P}")
-print(f"Rotated position: [{P_rotated[0]:.4f}, {P_rotated[1]:.4f}]")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    Original position: [4 3]<br>
-                    Rotated position: [0.7071, 4.9497]
+        <!-- Chapter 6 -->
+        <div class="chapter-card" id="chapter6">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-shapes"></i>
+                </div>
+                <h2 class="chapter-title">Chapter 6: Quadratic Forms & Structural Stability</h2>
+                <div class="chapter-hours">06 hours</div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Key Concepts
+                </h3>
+                
+                <div class="key-concepts">
+                    <div class="concept-card">
+                        <h4 class="concept-title">Quadratic Forms</h4>
+                        <p>Expressions \(Q(x) = x^TAx\) where \(A\) is symmetric matrix, representing energy functions in engineering.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Definiteness</h4>
+                        <p>Classification: Positive definite (\(\lambda_i > 0\)), negative definite (\(\lambda_i < 0\)), indefinite (mixed signs).</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4 class="concept-title">Stability Criteria</h4>
+                        <p>Positive definite stiffness matrix → stable structure; indefinite → buckling possibility; singular → mechanism.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i>
+                    Core Principles
+                </h3>
+                
+                <div class="formula-container">
+                    <div class="formula">
+                        \[
+                        \text{Strain Energy: } U = \frac{1}{2}x^TKx
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Kinetic Energy: } T = \frac{1}{2}\dot{x}^TM\dot{x}
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Rayleigh Quotient: } R(v) = \frac{v^TKv}{v^TMv} \geq \lambda_{\min}
+                        \]
+                    </div>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Buckling: } (K - \lambda G)\phi = 0
+                        \]
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-cogs"></i>
+                    Structural Engineering Applications
+                </h3>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-hard-hat"></i>
+                        Column Buckling Analysis
+                    </h4>
+                    <p>For column with elastic stiffness \(K\) and geometric stiffness \(G\):</p>
+                    
+                    <div class="formula">
+                        \[
+                        \text{Solve } (K - \lambda G)\phi = 0 \Rightarrow \lambda_{\text{critical}} = \frac{\pi^2 EI}{L^2}
+                        \]
+                    </div>
+                    
+                    <p>Eigenvalues give buckling loads, eigenvectors show buckling mode shapes.</p>
+                </div>
+                
+                <div class="example">
+                    <h4 class="example-title">
+                        <i class="fas fa-balance-scale"></i>
+                        Stability Assessment
+                    </h4>
+                    <p>For stiffness matrix \(K\), check eigenvalues:</p>
+                    
+                    <div class="formula">
+                        \[
+                        \begin{aligned}
+                        &\lambda_i > 0: \text{Stable structure} \\
+                        &\lambda_i = 0: \text{Mechanism (rigid body mode)} \\
+                        &\lambda_i < 0: \text{Unstable (buckling)}
+                        \end{aligned}
+                        \]
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Labs Section -->
-        <div class="chapter" id="labs">
-            <div class="chapter-title">
-                <h2>Laboratory Implementations</h2>
+        <div class="chapter-card" id="labs">
+            <div class="chapter-header">
+                <div class="chapter-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h2 class="chapter-title">Laboratory Assessments & Practical Work</h2>
+                <div class="chapter-hours">20 hours</div>
             </div>
-
-            <!-- Lab 1: Spring System -->
-            <div class="card">
-                <h2>Lab 1: Spring-Mass System Analysis</h2>
-                
-                <div class="theory-box">
-                    <strong>Problem:</strong> Two masses connected by springs. Find displacement under applied force.
-                </div>
-
-                <h3>Physics:</h3>
-                <div class="equation">
-                    Force on mass m₁: F₁ = -k₁x₁ + k₂(x₂ - x₁)<br>
-                    Force on mass m₂: F₂ = -k₂(x₂ - x₁)<br>
-                    <br>
-                    At equilibrium: Sum of forces = 0<br>
-                    Matrix form: <strong>Kx = F</strong><br>
-                    where K is stiffness matrix
-                </div>
-
-                <h3>Parameters:</h3>
-                <ul style="margin-left: 2rem;">
-                    <li>k₁ = 10 N/m (spring constant)</li>
-                    <li>k₂ = 5 N/m</li>
-                    <li>F = 20 N (applied force)</li>
-                </ul>
-
-                <div class="code-block"><pre>import numpy as np
-
-# Spring constants
-k1, k2 = 10, 5
-
-# Stiffness matrix for 2-mass system
-# K = [[k1+k2, -k2], [-k2, k2]]
-K = np.array([[k1+k2, -k2], [-k2, k2]])
-
-# Applied forces
-F = np.array([20, 0])  # 20N on mass 1, 0 on mass 2
-
-# Solve: K*x = F
-displacements = np.linalg.solve(K, F)
-
-print(f"Stiffness Matrix K:")
-print(K)
-print(f"\nApplied Forces: {F}")
-print(f"\nDisplacements:")
-print(f"x1 = {displacements[0]:.4f} m")
-print(f"x2 = {displacements[1]:.4f} m")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    Stiffness Matrix K:<br>
-                    [[15 -5]<br>
-                    &nbsp;[-5  5]]<br>
-                    <br>
-                    Applied Forces: [20  0]<br>
-                    <br>
-                    Displacements:<br>
-                    x1 = 2.0000 m<br>
-                    x2 = 2.0000 m
-                </div>
-
-                <h3>Physical Interpretation:</h3>
-                <p>Both masses displace equally at 2m. The force on mass 1 compresses spring k₁, which pushes mass 2 through spring k₂.</p>
-            </div>
-
-            <!-- Lab 2: Truss Analysis -->
-            <div class="card">
-                <h2>Lab 2: Truss Member Force Analysis</h2>
-                
-                <div class="theory-box">
-                    <strong>Problem:</strong> Find internal forces in truss members under external load.
-                </div>
-
-                <h3>Theory:</h3>
-                <p>At each joint, sum of forces in x and y directions = 0</p>
-                <div class="equation">
-                    ΣFₓ = 0<br>
-                    ΣFᵧ = 0<br>
-                    <br>
-                    This gives equilibrium equations for each joint:<br>
-                    <strong>A·F = P</strong>
-                </div>
-
-                <h3>Example Configuration:</h3>
-                <ul style="margin-left: 2rem;">
-                    <li>3-member triangular truss</li>
-                    <li>10 kN vertical load at apex</li>
-                    <li>Members at specific angles</li>
-                </ul>
-
-                <div class="code-block"><pre>import numpy as np
-
-# Equilibrium matrix (force-geometry relationship)
-# Each row: force balance in x or y at a joint
-A = np.array([[1, 0, 0.6],      # Joint 1, x-direction
-              [0, -1, 0.8],      # Joint 1, y-direction
-              [0, 1, 0.8]])      # Joint 2, y-direction
-
-# External loads (kN)
-P = np.array([0, 0, 10])  # 10 kN downward
-
-# Solve for member forces
-F = np.linalg.solve(A, P)
-
-print(f"Member Forces (kN):")
-print(f"F1 = {F[0]:.2f} kN (compression)" if F[0] < 0 else f"F1 = {F[0]:.2f} kN (tension)")
-print(f"F2 = {F[1]:.2f} kN (compression)" if F[1] < 0 else f"F2 = {F[1]:.2f} kN (tension)")
-print(f"F3 = {F[2]:.2f} kN (compression)" if F[2] < 0 else f"F3 = {F[2]:.2f} kN (tension)")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    Member Forces (kN):<br>
-                    F1 = -3.75 kN (compression)<br>
-                    F2 = 5.00 kN (tension)<br>
-                    F3 = 6.25 kN (tension)
-                </div>
-
-                <h3>Analysis:</h3>
-                <ul style="margin-left: 2rem;">
-                    <li>Member 1: Compression (negative) - being pushed</li>
-                    <li>Members 2,3: Tension (positive) - being pulled</li>
-                    <li>Design must account for member type and material properties</li>
-                </ul>
-            </div>
-
-            <!-- Lab 3: Gaussian Elimination Extended -->
-            <div class="card">
-                <h2>Lab 3: Gaussian Elimination - Multi-Variable System</h2>
-                
-                <h3>Problem: Solve 3×3 System</h3>
-                <div class="equation">
-                    x + 2y + z = 9<br>
-                    2x + 5y + z = 20<br>
-                    3x + y + 2z = 13
-                </div>
-
-                <div class="code-block"><pre>import numpy as np
-
-# Coefficient matrix
-A = np.array([[1, 2, 1],
-              [2, 5, 1],
-              [3, 1, 2]], dtype=float)
-
-# Constants vector
-b = np.array([9, 20, 13], dtype=float)
-
-# Solve using numpy (Gaussian elimination internally)
-solution = np.linalg.solve(A, b)
-
-print(f"Solution:")
-print(f"x = {solution[0]:.4f}")
-print(f"y = {solution[1]:.4f}")
-print(f"z = {solution[2]:.4f}")
-
-# Verify solution
-verification = A @ solution
-print(f"\nVerification (A·x = b):")
-print(f"Expected: {b}")
-print(f"Got: {verification}")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    Solution:<br>
-                    x = 1.0000<br>
-                    y = 2.0000<br>
-                    z = 3.0000<br>
-                    <br>
-                    Verification (A·x = b):<br>
-                    Expected: [ 9. 20. 13.]<br>
-                    Got: [ 9. 20. 13.]
-                </div>
-            </div>
-
-            <!-- Lab 4: LU Decomposition Application -->
-            <div class="card">
-                <h2>Lab 4: LU Decomposition - Multiple Solutions</h2>
-                
-                <h3>Scenario: Spring System with Different Loads</h3>
-                <p>Decompose stiffness matrix once, then solve for different force vectors efficiently:</p>
-
-                <div class="code-block"><pre>from scipy.linalg import lu_factor, lu_solve
-import numpy as np
-
-# Stiffness matrix (3-mass spring system)
-A = np.array([[30, -10, 0],
-              [-10, 30, -20],
-              [0, -20, 20]], dtype=float)
-
-# Different loading conditions
-loads = {
-    "Case 1": np.array([100, 0, 0]),
-    "Case 2": np.array([0, 100, 0]),
-    "Case 3": np.array([50, 50, 50])
-}
-
-# LU factorization (done once)
-lu, piv = lu_factor(A)
-
-print("LU Factorization: A = LU")
-print("\nSolving for different loads:\n")
-
-for case_name, load_vector in loads.items():
-    # Solve using pre-factored LU
-    displacement = lu_solve((lu, piv), load_vector)
-    print(f"{case_name} (Load = {load_vector}):")
-    print(f"  Displacements: {displacement}")
-    print()</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    LU Factorization: A = LU<br>
-                    <br>
-                    Solving for different loads:<br>
-                    <br>
-                    Case 1 (Load = [100  0  0]):<br>
-                    &nbsp;Displacements: [4.33 1.44 0.72]<br>
-                    <br>
-                    Case 2 (Load = [0 100 0]):<br>
-                    &nbsp;Displacements: [2.86 4.29 2.14]<br>
-                    <br>
-                    Case 3 (Load = [50 50 50]):<br>
-                    &nbsp;Displacements: [4.76 3.81 3.33]
-                </div>
-            </div>
-
-            <!-- Lab 5: Robot Kinematics -->
-            <div class="card">
-                <h2>Lab 5: Robot Kinematics - 2 Link Arm</h2>
-                
-                <div class="theory-box">
-                    <strong>Forward Kinematics:</strong> Given joint angles θ₁, θ₂, find end-effector position (x, y)
-                </div>
-
-                <h3>Transformation Equations:</h3>
-                <div class="equation">
-                    x = L₁·cos(θ₁) + L₂·cos(θ₁ + θ₂)<br>
-                    y = L₁·sin(θ₁) + L₂·sin(θ₁ + θ₂)<br>
-                    <br>
-                    where L₁, L₂ are link lengths
-                </div>
-
-                <div class="code-block"><pre>import numpy as np
-
-# Link lengths (meters)
-L1, L2 = 2.0, 1.5
-
-# Joint angles (degrees)
-theta1_deg, theta2_deg = 30, 45
-
-# Convert to radians
-theta1 = np.radians(theta1_deg)
-theta2 = np.radians(theta2_deg)
-
-# Forward kinematics
-x = L1 * np.cos(theta1) + L2 * np.cos(theta1 + theta2)
-y = L1 * np.sin(theta1) + L2 * np.sin(theta1 + theta2)
-
-print(f"2-Link Robot Arm")
-print(f"Link 1 length: {L1} m")
-print(f"Link 2 length: {L2} m")
-print(f"Joint angles: θ₁ = {theta1_deg}°, θ₂ = {theta2_deg}°")
-print(f"\nEnd-effector position:")
-print(f"x = {x:.4f} m")
-print(f"y = {y:.4f} m")
-print(f"Distance from origin: {np.sqrt(x**2 + y**2):.4f} m")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    2-Link Robot Arm<br>
-                    Link 1 length: 2.0 m<br>
-                    Link 2 length: 1.5 m<br>
-                    Joint angles: θ₁ = 30°, θ₂ = 45°<br>
-                    <br>
-                    End-effector position:<br>
-                    x = 2.1203 m<br>
-                    y = 2.4489 m<br>
-                    Distance from origin: 3.2457 m
-                </div>
-
-                <h3>Workspace Analysis:</h3>
-                <ul style="margin-left: 2rem;">
-                    <li>Maximum reach: L₁ + L₂ = 3.5 m</li>
-                    <li>Minimum reach: |L₁ - L₂| = 0.5 m</li>
-                    <li>The arm can reach any point in the annular region between these bounds</li>
-                </ul>
-            </div>
-
-            <!-- Lab 6: 3-Link Robot -->
-            <div class="card">
-                <h2>Lab 6: 3-Link Robot Arm Extended</h2>
-                
-                <h3>Forward Kinematics for 3 DOF</h3>
-                <p>End-effector position with three joints:</p>
-
-                <div class="code-block"><pre>import numpy as np
-
-# Link lengths (meters)
-L1, L2, L3 = 1.0, 0.8, 0.6
-
-# Joint angles (radians)
-theta1 = np.radians(30)
-theta2 = np.radians(45)
-theta3 = np.radians(20)
-
-# Calculate position of each joint
-x1 = L1 * np.cos(theta1)
-y1 = L1 * np.sin(theta1)
-
-x2 = x1 + L2 * np.cos(theta1 + theta2)
-y2 = y1 + L2 * np.sin(theta1 + theta2)
-
-x3 = x2 + L3 * np.cos(theta1 + theta2 + theta3)
-y3 = y2 + L3 * np.sin(theta1 + theta2 + theta3)
-
-print(f"3-Link Robot Configuration")
-print(f"Θ₁ = 30°, Θ₂ = 45°, Θ₃ = 20°")
-print(f"\nJoint Positions:")
-print(f"Base: (0.000, 0.000)")
-print(f"Joint 1: ({x1:.4f}, {y1:.4f})")
-print(f"Joint 2: ({x2:.4f}, {y2:.4f})")
-print(f"End-Effector: ({x3:.4f}, {y3:.4f})")
-print(f"\nTotal Reach: {np.sqrt(x3**2 + y3**2):.4f} m")</pre></div>
-
-                <div class="output-block">
-                    <strong>Output:</strong><br>
-                    3-Link Robot Configuration<br>
-                    Θ₁ = 30°, Θ₂ = 45°, Θ₃ = 20°<br>
-                    <br>
-                    Joint Positions:<br>
-                    Base: (0.000, 0.000)<br>
-                    Joint 1: (0.8660, 0.5000)<br>
-                    Joint 2: (1.4821, 1.4269)<br>
-                    End-Effector: (1.9835, 1.8947)<br>
-                    <br>
-                    Total Reach: 2.7345 m
-                </div>
-
-                <h3>Significance:</h3>
-                <ul style="margin-left: 2rem;">
-                    <li>3 DOF allows reaching any position in a circular workspace</li>
-                    <li>Configurations with same endpoint but different θ values exist</li>
-                    <li>Inverse kinematics (given position, find angles) is more complex</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Summary Section -->
-        <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 3rem;">
-            <h2 style="color: white; border-bottom-color: white;">Key Takeaways</h2>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
-                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px;">
-                    <h4 style="color: white;">Matrices Unify Problems</h4>
-                    <p>Springs, trusses, pipes, robots - all use Ax = b</p>
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-clipboard-check"></i>
+                    Lab Overview
+                </h3>
+                <p>Four comprehensive laboratory assessments implementing linear algebra concepts in engineering problems using analytical methods and computational tools.</p>
+            </div>
+            
+            <div class="labs-grid">
+                <!-- Lab 1 -->
+                <div class="lab-card">
+                    <div class="lab-number">Lab 1</div>
+                    <h3 class="lab-title">Spring System Analysis</h3>
+                    <div class="lab-content">
+                        <p><strong>Problem:</strong> 4-mass spring system displacement under applied loads</p>
+                        <p><strong>Methods:</strong> Matrix assembly, equilibrium equations, numerical solution</p>
+                        <p><strong>Key Results:</strong> Displacements: u₁=0.225m, u₂=0.402m, u₃=0.455m, u₄=0.497m</p>
+                    </div>
+                    <div class="lab-preview">
+                        <div style="text-align: center;">
+                            <i class="fas fa-spring fa-3x" style="color: var(--accent-cyan); margin-bottom: 1rem;"></i>
+                            <p>Spring-Mass System Analysis</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px;">
-                    <h4 style="color: white;">Computational Efficiency</h4>
-                    <p>LU decomposition enables fast solving of multiple systems</p>
+                <!-- Lab 2 -->
+                <div class="lab-card">
+                    <div class="lab-number">Lab 2</div>
+                    <h3 class="lab-title">Truss Force Analysis</h3>
+                    <div class="lab-content">
+                        <p><strong>Problem:</strong> Triangular truss member forces under vertical load</p>
+                        <p><strong>Methods:</strong> Equilibrium at joints, matrix solution</p>
+                        <p><strong>Key Results:</strong> F₁=-225N (T), F₂=375N (C), F₃=375N (C)</p>
+                    </div>
+                    <div class="lab-preview">
+                        <div style="text-align: center;">
+                            <i class="fas fa-bridge fa-3x" style="color: var(--accent-purple); margin-bottom: 1rem;"></i>
+                            <p>Truss Equilibrium Analysis</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px;">
-                    <h4 style="color: white;">Geometry & Algebra</h4>
-                    <p>Linear transformations visualize algebraic operations</p>
+                <!-- Lab 3 -->
+                <div class="lab-card">
+                    <div class="lab-number">Lab 3</div>
+                    <h3 class="lab-title">Gauss & LU Methods</h3>
+                    <div class="lab-content">
+                        <p><strong>Problem:</strong> Spring system and linear equations solution</p>
+                        <p><strong>Methods:</strong> Gaussian elimination, LU decomposition</p>
+                        <p><strong>Key Results:</strong> Displacements and system solutions</p>
+                    </div>
+                    <div class="lab-preview">
+                        <div style="text-align: center;">
+                            <i class="fas fa-calculator fa-3x" style="color: var(--accent-green); margin-bottom: 1rem;"></i>
+                            <p>Matrix Decomposition Methods</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 8px;">
-                    <h4 style="color: white;">Rank Determines Solvability</h4>
-                    <p>Physical meaning: structure stability, flow feasibility</p>
+                <!-- Lab 4 -->
+                <div class="lab-card">
+                    <div class="lab-number">Lab 4</div>
+                    <h3 class="lab-title">Robot Kinematics</h3>
+                    <div class="lab-content">
+                        <p><strong>Problem:</strong> 2R & 3R robot forward kinematics and workspace</p>
+                        <p><strong>Methods:</strong> Homogeneous transformations, forward kinematics</p>
+                        <p><strong>Key Results:</strong> End-effector positions, workspace analysis</p>
+                    </div>
+                    <div class="lab-preview">
+                        <div style="text-align: center;">
+                            <i class="fas fa-robot fa-3x" style="color: var(--accent-orange); margin-bottom: 1rem;"></i>
+                            <p>Robotic Arm Kinematics</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <div class="content-section">
+                <h3 class="section-title">
+                    <i class="fas fa-code"></i>
+                    Computational Implementation
+                </h3>
+                <p>All laboratory work implemented in Python using NumPy for matrix operations, with focus on:</p>
+                <ul style="margin-left: 2rem; color: var(--text-gray); line-height: 1.8;">
+                    <li>Matrix assembly for physical systems</li>
+                    <li>Numerical solution methods (Gauss, LU, QR)</li>
+                    <li>Forward kinematics for robotics</li>
+                    <li>Error analysis and validation</li>
+                </ul>
+            </div>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Linear Algebra in Engineering | Developed by Chidanand | <a href="https://github.com" style="color: #3498db;">GitHub</a></p>
-        <p>Course: 25EMAB202 | KLE Technological University, Hubli</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Linear Algebra Portfolio</h3>
+                <p>Comprehensive documentation of linear algebra applications in engineering, automation, and robotics.</p>
+                <div class="social-links">
+                    <a href="https://github.com/chidanand467" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Course Information</h3>
+                <ul class="footer-links">
+                    <li><strong>Course:</strong> 25EMAB202 - Linear Algebra</li>
+                    <li><strong>University:</strong> KLE Technological University</li>
+                    <li><strong>Department:</strong> Automation & Robotics</li>
+                    <li><strong>Semester:</strong> 3rd Semester</li>
+                    <li><strong>Student:</strong> Chidanand S K</li>
+                    <li><strong>SRN:</strong> 01FE24BAR027</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#chapter1">Chapter 1: Basics</a></li>
+                    <li><a href="#chapter2">Chapter 2: Matrix Methods</a></li>
+                    <li><a href="#chapter3">Chapter 3: Vector Spaces</a></li>
+                    <li><a href="#chapter4">Chapter 4: Orthogonality</a></li>
+                    <li><a href="#chapter5">Chapter 5: Eigenvalues</a></li>
+                    <li><a href="#chapter6">Chapter 6: Quadratic Forms</a></li>
+                    <li><a href="#labs">Laboratory Work</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Linear Algebra Portfolio | Chidanand S K | KLE Technological University, Hubli</p>
+            <p>This portfolio demonstrates practical applications of linear algebra in engineering systems.</p>
+        </div>
     </footer>
 
     <script>
-        // Tab functionality
-        function switchTab(event, tabName) {
-            const contents = document.querySelectorAll('.tab-content');
-            const buttons = document.querySelectorAll('.tab-btn');
-            
-            contents.forEach(content => content.classList.remove('active'));
-            buttons.forEach(button => button.classList.remove('active'));
-            
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
+        // Initialize MathJax
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Chapter navigation
+        const chapterNavBtns = document.querySelectorAll('.chapter-nav-btn');
+        const chapterCards = document.querySelectorAll('.chapter-card');
+        
+        chapterNavBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-target');
+                
+                // Update active button
+                chapterNavBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Scroll to target chapter
+                const targetElement = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL hash
+                window.location.hash = targetId;
             });
         });
 
-        // Highlight code on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Linear Algebra Portfolio Loaded Successfully!');
+        // Scroll animation for chapter cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        chapterCards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Matrix background animation
+        function createMatrixBackground() {
+            const matrixBg = document.getElementById('matrixBg');
+            const characters = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            for (let i = 0; i < 50; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${Math.random() * 100}%`;
+                column.style.animationDelay = `${Math.random() * 20}s`;
+                column.style.animationDuration = `${10 + Math.random() * 20}s`;
+                
+                // Create characters in column
+                for (let j = 0; j < 20; j++) {
+                    const char = document.createElement('span');
+                    char.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+                    char.style.opacity = 0.1 + Math.random() * 0.9;
+                    char.style.marginBottom = '10px';
+                    char.style.display = 'block';
+                    column.appendChild(char);
+                }
+                
+                matrixBg.appendChild(column);
+            }
+        }
+
+        // Update active nav link based on scroll
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('.chapter-card, .hero');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                if (scrollPosition >= section.offsetTop) {
+                    currentSection = '#' + section.id;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Update chapter nav buttons
+            chapterNavBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-target') === currentSection.substring(1)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createMatrixBackground();
+            updateActiveNavLink();
+            
+            // Add scroll event listener
+            window.addEventListener('scroll', updateActiveNavLink);
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        });
+
+        // Smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 </body>
